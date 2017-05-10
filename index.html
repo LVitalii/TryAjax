@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="show()" id="button" style="align-content: center">Click me!</button>
+
+    <script>
+        function show() {
+            button.innerHTML = ' ... ';
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'pack.json', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState != 4) return;
+
+                if (xhr.status != 200) {
+                    // обработать ошибку
+                    alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+                    return;
+                }
+                else {
+                    alert(xhr.responseText);
+                }
+
+                // обработать результат
+                button.innerHTML = xhr.responseText;
+            }
+
+            xhr.send(null);
+        }
+    </script>
+</body>
+</html>
